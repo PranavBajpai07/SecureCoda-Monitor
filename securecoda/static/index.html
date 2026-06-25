@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SecureCoda</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>SecureCoda</h1>
+        <p id="scan-state">Loading monitor state</p>
+      </div>
+      <div class="actions">
+        <label class="select-label">
+          Status
+          <select id="status-filter">
+            <option value="open">Open</option>
+            <option value="remediated">Remediated</option>
+            <option value="resolved">Resolved</option>
+            <option value="all">All</option>
+          </select>
+        </label>
+        <label class="toggle">
+          <input id="auto-refresh" type="checkbox" checked />
+          <span>Auto-refresh</span>
+        </label>
+        <button id="scan-button" class="primary" type="button">Run Scan</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="metrics" aria-label="Alert summary">
+        <div class="metric critical">
+          <span>Critical</span>
+          <strong id="critical-count">0</strong>
+        </div>
+        <div class="metric high">
+          <span>High</span>
+          <strong id="high-count">0</strong>
+        </div>
+        <div class="metric medium">
+          <span>Medium</span>
+          <strong id="medium-count">0</strong>
+        </div>
+        <div class="metric total">
+          <span>Open</span>
+          <strong id="open-count">0</strong>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Severity</th>
+                <th>Rule</th>
+                <th>Doc</th>
+                <th>Object</th>
+                <th>Finding</th>
+                <th>Last seen</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="alerts-body"></tbody>
+          </table>
+          <div id="empty-state" class="empty" hidden>No alerts match the current filter.</div>
+        </div>
+
+        <aside class="detail-pane" id="detail-pane">
+          <h2 id="detail-title">Alert Detail</h2>
+          <dl>
+            <dt>Location</dt>
+            <dd id="detail-location">-</dd>
+            <dt>Remediation</dt>
+            <dd id="detail-remediation">-</dd>
+            <dt>Details</dt>
+            <dd><pre id="detail-json">{}</pre></dd>
+          </dl>
+        </aside>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
+
